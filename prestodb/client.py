@@ -65,6 +65,7 @@ class ClientSession(object):
         schema,
         source,
         user,
+        role,
         properties=None,
         headers=None,
         transaction_id=None,
@@ -73,6 +74,7 @@ class ClientSession(object):
         self.schema = schema
         self.source = source
         self.user = user
+        self.role = role
         if properties is None:
             properties = {}
         self._properties = properties
@@ -196,6 +198,7 @@ class PrestoRequest(object):
         host,  # type: Text
         port,  # type: int
         user,  # type: Text
+        role,  # type: Text
         source=None,  # type: Text
         catalog=None,  # type: Text
         schema=None,  # type: Text
@@ -216,6 +219,7 @@ class PrestoRequest(object):
             schema,
             source,
             user,
+            role,
             session_properties,
             http_headers,
             transaction_id,
@@ -262,6 +266,7 @@ class PrestoRequest(object):
         headers[constants.HEADER_SCHEMA] = self._client_session.schema
         headers[constants.HEADER_SOURCE] = self._client_session.source
         headers[constants.HEADER_USER] = self._client_session.user
+        headers[constants.HEADER_ROLE] = self._client_session.role
 
         headers[constants.HEADER_SESSION] = ",".join(
             # ``name`` must not contain ``=``

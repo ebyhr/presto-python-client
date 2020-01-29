@@ -309,6 +309,7 @@ def test_request_headers(monkeypatch):
     catalog = "test_catalog"
     schema = "test_schema"
     user = "test_user"
+    role = "test_role"
     source = "test_source"
     accept_encoding_header = "accept-encoding"
     accept_encoding_value = "identity,deflate,gzip"
@@ -319,6 +320,7 @@ def test_request_headers(monkeypatch):
         host="coordinator",
         port=8080,
         user=user,
+        role=role,
         source=source,
         catalog=catalog,
         schema=schema,
@@ -336,6 +338,7 @@ def test_request_headers(monkeypatch):
         assert headers[constants.HEADER_SCHEMA] == schema
         assert headers[constants.HEADER_SOURCE] == source
         assert headers[constants.HEADER_USER] == user
+        assert headers[constants.HEADER_ROLE] == role
         assert headers[constants.HEADER_SESSION] == ""
         assert headers[accept_encoding_header] == accept_encoding_value
         assert headers[client_info_header] == client_info_value
